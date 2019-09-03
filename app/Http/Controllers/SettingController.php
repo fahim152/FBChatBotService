@@ -110,7 +110,7 @@ class SettingController extends Controller
 
             if ($setting->save()) {
                 $this->success();
-                $default = "Setting Name '" . $setting->name . "'";
+                $default = "Setting Name '" . $setting->fb_app_name . "'";
                 $this->message = ($request->setting) ? "$default Updated" : "New $default Added";
                 if (!$request->setting) {
                     $data['redirect_to'] = route('settings');
