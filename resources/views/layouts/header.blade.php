@@ -4,9 +4,9 @@
     <div class="page-header-inner ">
         <!-- BEGIN LOGO -->
         <div class="page-logo">
-            <a href="{{ route('home') }}">
+            {{-- <a href="{{ route('home') }}">
                 <img src="{{ asset('img/logo.png') }}" alt="logo" class="logo-default"/>
-            </a>
+            </a> --}}
             @if(Auth::check())
             <div class="menu-toggler sidebar-toggler">
                 <!-- DOC: Remove the above "hide" to enable the sidebar toggler button on header -->
