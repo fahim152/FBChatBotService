@@ -20,6 +20,11 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/register', 'HomeController@index')->name('home');
 Route::post('/lang', 'HomeController@lang')->name('lang');
+ /* -------------------------------------------------------------------------
+    | Bot
+    |------------------------------------------------------------------------ */
+    Route::get('/bot','BotController@bot');
+    Route::post('/bot','BotController@bot');
 
 Route::group(['middleware' => 'auth'],function() {
 
@@ -71,11 +76,7 @@ Route::group(['middleware' => 'auth'],function() {
     Route::get('/settings/edit/{setting}', 'SettingController@edit')->name('settings_edit');
     Route::post('/settings/update', 'SettingController@update')->name('settings_update');
 
-    /* -------------------------------------------------------------------------
-    | Bot
-    |------------------------------------------------------------------------ */
-    Route::get('/bot','BotController@bot')->middleware('verifybot');
-    Route::post('/bot','BotController@bot');
+
 
 
 });
