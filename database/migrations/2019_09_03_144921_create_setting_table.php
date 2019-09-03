@@ -15,6 +15,8 @@ class CreateSettingTable extends Migration
     {
         Schema::create('setting', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('fb_app_name')->nullable();
+            $table->text('token')->nullable();
             $table->timestamps();
         });
     }

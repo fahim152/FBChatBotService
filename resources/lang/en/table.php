@@ -9,7 +9,7 @@ return [
     'saving_option'         => 'Saving Option',
     'reload'                => 'Reload',
     'cancel'                => 'Cancel',
-    
+
     'action'                => 'Action',
     'search'                => 'Search',
     'reset'                 => 'Reset',
@@ -37,5 +37,8 @@ return [
     'updated_time'          => 'Updated Time',
     'deleted_time'          => 'Deleted Time',
     'checked_time'          => 'Checked Time',
+
+    'fb_app_name'           => 'FB App Name',
+    'token'                 => 'Token',
 
 ];

@@ -11,10 +11,11 @@ trait Menu {
     public function menu() {
         return [
             ['visible' => true, 'tag' => 'dashboard', 'lang_tag' => "dashboard", 'url' => route('dashboard'), 'icon' => '<i class="icon-home"></i>',],
+            ['visible' => true, 'tag' => 'settings', 'lang_tag' => "settings", 'url' => route('settings'), 'icon' => '<i class="icon-gear"></i>',],
 
             ['visible' => $this->hasItems(['users','groups']), 'tag' => 'heading', 'lang_tag' => 'operation_setup'],
             ['visible' => $this->checkMenuPermission('users'), 'tag' => 'users', 'lang_tag' => "users", 'url' => route('users'), 'icon' => '<i class="icon-user"></i>',],
-            ['visible' => $this->checkMenuPermission('groups'), 'tag' => 'groups', 'lang_tag' => "groups", 'url' => route('groups'), 'icon' => '<i class="icon-key"></i>',],            
+            ['visible' => $this->checkMenuPermission('groups'), 'tag' => 'groups', 'lang_tag' => "groups", 'url' => route('groups'), 'icon' => '<i class="icon-key"></i>',],
         ];
     }
 

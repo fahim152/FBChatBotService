@@ -44,7 +44,7 @@ Route::group(['middleware' => 'auth'],function() {
 
     Route::get('/users/permission/{user}', 'UserController@permission')->name('user_permission');
     Route::post('/users/permission/update', 'UserController@permissionUpdate')->name('user_delete');
-    
+
     Route::get('/profile', 'UserController@profile')->name('profile');
     Route::post('/profile/update', 'UserController@profileUpdate')->name('profile_update');
     Route::post('/profile/password/update', 'UserController@passwordUpdate')->name('password_update');
@@ -61,5 +61,14 @@ Route::group(['middleware' => 'auth'],function() {
     Route::post('/groups/update', 'GroupController@update')->name('group_update');
     Route::get('/groups/permission/{group}', 'GroupController@createPermission')->name('group_permission');
     Route::post('/groups/permission/update', 'GroupController@updatePermission')->name('group_permission_update');
+
+    /* -------------------------------------------------------------------------
+    | Setting
+    |------------------------------------------------------------------------ */
+    Route::get('/settings', 'SettingController@index')->name('settings');
+    Route::post('/settings/dataload', 'SettingController@datatable')->name('settings_load');
+    Route::get('/settings/create', 'SettingController@create')->name('settings_create');
+    Route::get('/settings/edit/{setting}', 'SettingController@edit')->name('settings_edit');
+    Route::post('/settings/update', 'SettingController@update')->name('settings_update');
 
 });

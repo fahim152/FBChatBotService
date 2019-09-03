@@ -4,7 +4,7 @@ return [
     'success'               => ':attribute Successfully.',
     'fail'                  => ':attribute Failed!',
     'missing'               => ':attribute Missing!',
-    
+
     'create'                => 'Create',
     'edit'                  => 'Edit',
     'update'                => 'Update',
@@ -28,7 +28,7 @@ return [
     'close'                 => 'Close',
     'action'                => 'Action',
     'resend'                => 'Resend',
-    
+
     'viewing'               => 'Viewing :attribute',
     'creating'              => 'Creating :attribute',
     'updating'              => 'Updating :attribute',
@@ -66,5 +66,8 @@ return [
     'groups'                => 'Groups',
     'user'                  => 'User',
     'users'                 => 'Users',
+
+    'settings'               => 'Settings',
+    'setting'                => 'Setting',
 ];
 
