@@ -1,0 +1,11 @@
+$.blockUI.defaults.css.border = 'none';
+$.blockUI.defaults.css.padding = '15px 15px';
+$.blockUI.defaults.css.backgroundColor = '#343747';
+$.blockUI.defaults.css.borderRadius = '3px';
+$.blockUI.defaults.css.opacity = 0.6;
+$.blockUI.defaults.css.color = '#FFF';
+$.blockUI.defaults.css.width = '20%';
+$.blockUI.defaults.css.left = '40%';
+$.blockUI.defaults.message = '<h4>Please wait ...</h4>';
+$.blockUI.defaults.overlayCSS.backgroundColor = '#181920';
+$.blockUI.defaults.overlayCSS.opacity = 0.2;

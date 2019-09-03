@@ -1,0 +1,101 @@
+/* here you can put your own css to customize and override the theme */
+/* @font-face {
+    font-family: 'NikoshBAN';
+    src: url('../fonts/NikoshBAN.eot');
+    src: url('../fonts/NikoshBAN.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/NikoshBAN.woff2') format('woff2'),
+        url('../fonts/NikoshBAN.woff') format('woff'),
+        url('../fonts/NikoshBAN.ttf') format('truetype'),
+        url('../fonts/NikoshBAN.svg#NikoshBAN') format('svg');
+    font-weight: normal;
+    font-style: normal;
+} */
+
+@font-face {
+    font-family: 'Kalpurush';
+    src: url('../fonts/Kalpurush.eot');
+    src: url('../fonts/Kalpurush.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/Kalpurush.woff2') format('woff2'),
+        url('../fonts/Kalpurush.woff') format('woff'),
+        url('../fonts/Kalpurush.ttf') format('truetype'),
+        url('../fonts/Kalpurush.svg#Kalpurush') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+body, h1, h2, h3, h4, h5, h6 {
+    font-family: "Open Sans", "Kalpurush", sans-serif;
+}
+body.lang-bn {
+    font-size: 16px;
+}
+.lang-bn .table thead tr th {
+    font-size: 16px;
+}
+
+.lang-bn .page-sidebar .page-sidebar-menu li > a > .title,
+.lang-bn .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu li > a > .title {
+    font-size: 16px;
+}
+.lang-bn .page-sidebar .page-sidebar-menu > li.heading > h3,
+.lang-bn .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu > li.heading > h3 {
+    font-size: 14px;
+}
+
+.page-header.navbar .page-logo .logo-default {
+    margin: 15px 0px 0 0px;
+}
+.filter .form-inline {
+    display: flex;
+}
+@media (min-width: 768px){
+    .filter .form-inline .input-group {
+        display: flex;
+        vertical-align: middle;
+    }
+}
+.filter .form-inline .input-group .form-control {
+    width: 70px !important;
+}
+.filter .form-inline .input-group-btn .btn{
+    margin-right: 0;
+}
+.form-info .form-group {
+    margin-bottom: 5px;
+}
+.table-checkable tr > th:first-child, .table-checkable tr > td:first-child{
+    position: relative;
+    overflow: hidden;
+}
+.new-notifier-right{
+    transform: rotate(45deg);
+    position: absolute;
+    top: -10px;
+    right: -19px;
+    font-size: 11px;
+    padding-left: 2px;
+    color: white;
+    background: red;
+    width: 50px;
+    padding-top: 15px;
+    padding-bottom: 1px;
+}
+.new-notifier-left{
+    transform: rotate(-45deg);
+    position: absolute;
+    top: -10px;
+    left: -19px;
+    font-size: 11px;
+    padding-right: 2px;
+    color: white;
+    background: red;
+    width: 50px;
+    padding-top: 15px;
+    padding-bottom: 1px;
+}
+.chartSelector{
+    width: 50%;
+    float: right;
+}
+.chart-actions{
+    margin-bottom: 70px;
+}
