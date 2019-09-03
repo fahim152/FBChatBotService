@@ -64,13 +64,10 @@ class SettingController extends Controller
     }
 
     public function edit(Request $request) {
-
-
             $setting = Setting::find($request->setting);
 
             if ($setting) {
                 $params['setting'] = $setting;
-
                 $params['lang_type'] = "edit";
 
                 return view('setting-create', $params)->withNav($this->nav);

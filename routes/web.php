@@ -76,6 +76,15 @@ Route::group(['middleware' => 'auth'],function() {
     Route::get('/settings/edit/{setting}', 'SettingController@edit')->name('settings_edit');
     Route::post('/settings/update', 'SettingController@update')->name('settings_update');
 
+    /* -------------------------------------------------------------------------
+    | Setting
+    |------------------------------------------------------------------------ */
+    Route::get('/chats', 'ChatController@index')->name('chats');
+    Route::post('/chats/dataload', 'ChatController@datatable')->name('chats_load');
+    Route::get('/chats/create', 'ChatController@create')->name('chats_create');
+    Route::get('/chats/edit/{setting}', 'ChatController@edit')->name('chats_edit');
+    Route::post('/chats/update', 'ChatController@update')->name('chats_update');
+
 
 
 

@@ -40,5 +40,8 @@ return [
 
     'fb_app_name'           => 'FB App Name',
     'token'                 => 'Token',
+    'message_like'          => 'Message Like',
+    'reply_with'           => 'Reply With',
+    'app_token'                 => ' App Token',
 
 ];

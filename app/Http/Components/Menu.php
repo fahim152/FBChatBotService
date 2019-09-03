@@ -11,7 +11,8 @@ trait Menu {
     public function menu() {
         return [
             ['visible' => true, 'tag' => 'dashboard', 'lang_tag' => "dashboard", 'url' => route('dashboard'), 'icon' => '<i class="icon-home"></i>',],
-            ['visible' => true, 'tag' => 'settings', 'lang_tag' => "settings", 'url' => route('settings'), 'icon' => '<i class="icon-gear"></i>',],
+            ['visible' => true, 'tag' => 'settings', 'lang_tag' => "settings", 'url' => route('settings'), 'icon' => '<i class="icon-settings"></i>',],
+            ['visible' => true, 'tag' => 'chats', 'lang_tag' => "chats", 'url' => route('chats'), 'icon' => '<i class="icon-envelope"></i>',],
 
             ['visible' => $this->hasItems(['users','groups']), 'tag' => 'heading', 'lang_tag' => 'operation_setup'],
             ['visible' => $this->checkMenuPermission('users'), 'tag' => 'users', 'lang_tag' => "users", 'url' => route('users'), 'icon' => '<i class="icon-user"></i>',],

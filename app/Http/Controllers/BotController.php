@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Setting;
+use App\Chat;
 class BotController extends Controller
 {
     public function bot(Request $request)
@@ -11,14 +12,13 @@ class BotController extends Controller
 
         $data = $request->all();
         //fetching access token from db based on sent app token.
-     //   $accessToken = Setting::where('fb_app_name', $request['hub_verify_token'])->pluck('token')->first();
+        //$accessToken = Setting::where('fb_app_name', $request['hub_verify_token'])->pluck('token')->first();
 
         /**
          * here we can make this dynamic by simple fetching app names from db. store it in array and find name via in_array() function.
          *  I'm keeping it simple for now
          * */
         $hubVerifyToken = 'freelancebees';
-
         $accessToken ="EAAjVJKXVuZC8BAGXzdgJfoXZCH4wtlSZAcZAzZBMDeX9oVxsxR8yxYWOZAo2B3ggH1JmwySOrJZAFKitNzpHpBqGtkTbaERMsoRwAQZCrra93kJInWfQI5aGOXBBPK7RgdTwZAjMxsid7wYuShBCdWAeqcIVYT5SgGPMwdjRSikC6KYGNSLqTlLnjAKZAacHdV02YZD";
 
         if ($request['hub_verify_token'] === $hubVerifyToken) {
@@ -29,20 +29,18 @@ class BotController extends Controller
         $senderId = $data['entry'][0]['messaging'][0]['sender']['id'];
         $messageText =  $data['entry'][0]['messaging'][0]['message']['text'];
 
-        if($messageText== "hi"){
-            $answer="hello Sir, Do you need assistance? Reply yes or no ";
-        }elseif($messageText == "yes"){
-            $answer="Great you have it then.";
-        }elseif($messageText == "no"){
-            $answer="Okay sir. See you again";
-        }else{
-            $answer="I dont understand what you have said, Do you need assistance? Please reply yes or no ";
+        if($messageText !== ""){
+            $answer= Chat::where('message_like','LIKE',"%$messageText%")->pluck('reply_with')->first();
+            if($answer == null || $answer == ""){
+                $answer="I'm afraid :( I can't understand what you have just said.  ";
+            }
         }
 
         $response = [
             'recipient' => [ 'id' => $senderId ],
             'message' => [ 'text' => $answer ],
         ];
+
 
         $ch = curl_init('https://graph.facebook.com/v4.0/me/messages?access_token='.$accessToken);
         curl_setopt($ch, CURLOPT_POST, 1);

@@ -94,4 +94,13 @@ trait Component {
         return \Lang::getLocale();
     }
 
+    public function clearText($text)
+    {
+        $text = trim($text);
+        $text = strip_tags($text);
+        $text = htmlspecialchars($text);
+
+        return $text;
+    }
+
 }

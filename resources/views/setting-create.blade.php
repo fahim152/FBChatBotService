@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Create Setting  ')
+@section('title', 'Create Setting')
 
 
 @section('style')

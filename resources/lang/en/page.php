@@ -69,5 +69,7 @@ return [
 
     'settings'               => 'Settings',
     'setting'                => 'Setting',
+    'chats'                => 'Chats',
+
 ];
 
