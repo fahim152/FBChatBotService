@@ -37,6 +37,7 @@ class SettingController extends Controller
                 [ "title" => "#", "width" => "5%", "filter" => ""],
                 [ "title" => "fb_app_name", "filter" => $this->filterText("fb_app_name")],
                 // [ "title" => "token", "filter" => $this->filterText("token")],
+
                 [ "title" => "updated_time", "filter" => $this->filterDateRange()],
                 [ "title" => "action", "filter" => $this->filterAction()],
             ],
