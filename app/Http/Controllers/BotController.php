@@ -28,32 +28,89 @@ class BotController extends Controller
 
         $senderId = $data['entry'][0]['messaging'][0]['sender']['id'];
         $messageText =  $data['entry'][0]['messaging'][0]['message']['text'];
+        $postback = isset($data['entry'][0]['messaging'][0]['postback']['payload']) ? $data['entry'][0]['messaging'][0]['postback']['payload']: '';
+        $attach = false;
 
         if($messageText !== ""){
-            $answer= Chat::where('message_like','LIKE',"%$messageText%")->pluck('reply_with')->first();
+            $answer = Chat::where('message_like','LIKE',"%$messageText%")->pluck('reply_with')->first();
             if($answer == null || $answer == ""){
-                $answer="I'm afraid :( I can't understand what you have just said.  ";
+                $answer="I'm afraid :( I can't understand what you have just said. Do you want me to send an image? reply with yes/no";
             }
+            if($messageText == "yes"){
+                $attach = true;
+            }      
         }
 
-        $response = [
-            'recipient' => [ 'id' => $senderId ],
-            'message' => [ 'text' => $answer ],
-        ];
+        if($attach){
+            $response = [
+                'recipient' => [ 'id' => $senderId ],
+                 'message' => [ 'attachment' => [ 'type' => 'image', 'payload' => [ 'url' => 'https://www.google.com.bd/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'] ]],
+            ];
+        }else{
+            $response = [
+                'recipient' => [ 'id' => $senderId ],
+                "message"   => [ "text" => $answer ],
+            ];
+        }
+       
+        $this->sendMessage($accessToken, $response);
 
-
+    }
+        
+    
+    public function sendMessage($accessToken,$response){
         $ch = curl_init('https://graph.facebook.com/v4.0/me/messages?access_token='.$accessToken);
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($response));
         curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
-
         $result = curl_exec($ch);
-
         curl_close($ch);
-
-
     }
+
+    // public function sendMessagePostBack($accessToken,$response_greeting){
+    //     $ch = curl_init('https://graph.facebook.com/v2.6/me/messenger_profile?access_token='.$accessToken);
+    //     curl_setopt($ch, CURLOPT_POST, 1);
+    //     curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($response_greeting));
+    //     curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
+
+    //     $result = curl_exec($ch);
+
+    //     curl_close($ch);
+    // }
 }
+// greeting messge sending along with button template, pending work. 
+    //     $response_greeting = [
+    //         'recipient' => [ 'id' => $senderId ],
+    //         'message' => [ 
+    //                     'attachment' => ['type' => 'template', 
+    //                                         'payload' => [
+    //                                         'template_type' => 'generic',
+    //                                         'elements' => [
+    //                                             'title' => "kitten",
+    //                                             'subtitle' => 'cute kitten pic',
+    //                                             'image_url' => 'https://placekitten.com/g/200/200',
+    //                                             'button' => [
+    //                                                 'type' => 'web_url',
+    //                                                 "url"   => 'https://placekitten.com/g/200/200',
+    //                                                 "title" => "Show kitten",
+    //                                             ],
+    //                                                 'type' => 'postback',
+    //                                                 'title' => 'I like this',
+    //                                                 "payload" => "User " + $senderId + " likes kitten " + 'https://placekitten.com/g/200/200',
+
+    //                                                 ]
+    //                                         ] 
+    //                                     ] 
+
+    //                         ],
+        
+            
+    //                      ];
+
+
+
+    // }
+
 
 // Another approach
 

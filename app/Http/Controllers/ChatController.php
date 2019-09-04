@@ -72,7 +72,7 @@ class ChatController extends Controller
             $settings  = Setting::all();
             if ($chat) {
                 $params['chat'] = $chat;
-                $params['setting'] = $settings;
+                $params['settings'] = $settings;
                 $params['lang_type'] = "edit";
 
                 return view('chat-create', $params)->withNav($this->nav);
