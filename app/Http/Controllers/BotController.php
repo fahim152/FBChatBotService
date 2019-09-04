@@ -26,19 +26,25 @@ class BotController extends Controller
           exit;
         }
 
-        $senderId = $data['entry'][0]['messaging'][0]['sender']['id'];
-        $messageText =  $data['entry'][0]['messaging'][0]['message']['text'];
+        $senderId =  $data['entry'][0]['messaging'][0]['sender']['id'];
+        $messageText =  isset($data['entry'][0]['messaging'][0]['message']['text']) ? $data['entry'][0]['messaging'][0]['message']['text'] : '';
         $postback = isset($data['entry'][0]['messaging'][0]['postback']['payload']) ? $data['entry'][0]['messaging'][0]['postback']['payload']: '';
         $attach = false;
-
+        $answer = ''; 
         if($messageText !== ""){
             $answer = Chat::where('message_like','LIKE',"%$messageText%")->pluck('reply_with')->first();
             if($answer == null || $answer == ""){
                 $answer="I'm afraid :( I can't understand what you have just said. Do you want me to send an image? reply with yes/no";
+               
+                
             }
             if($messageText == "yes"){
                 $attach = true;
-            }      
+            }elseif($messageText == "no"){
+                $dd =  $this->sendMessagePostBack($accessToken, $senderId);
+                print_r($dd);
+                die();
+            }   
         }
 
         if($attach){
@@ -51,10 +57,12 @@ class BotController extends Controller
                 'recipient' => [ 'id' => $senderId ],
                 "message"   => [ "text" => $answer ],
             ];
+
+            
         }
        
         $this->sendMessage($accessToken, $response);
-
+        
     }
         
     
@@ -67,16 +75,42 @@ class BotController extends Controller
         curl_close($ch);
     }
 
-    // public function sendMessagePostBack($accessToken,$response_greeting){
-    //     $ch = curl_init('https://graph.facebook.com/v2.6/me/messenger_profile?access_token='.$accessToken);
-    //     curl_setopt($ch, CURLOPT_POST, 1);
-    //     curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($response_greeting));
-    //     curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
+    public function sendMessagePostBack($accessToken,$senderId){
+        $response_json = '{
+            "recipient":{
+                "id":"'.$senderId.'"
+            },
+            "message": {
+                "attachment":{
+                    "type":"template",
+                    "payload":{
+                        "template_type":"button",
+                        "text":"You can View our website";
+                        "buttons": [
+                            {
+                                "type":"web_url",
+                                "utl":"www.daraz.com",
+                                "title":"Show website"   
+                            },
+                            {
+                                "type":"postback",
+                                "title":"Start Chatting",
+                                "payload":"USER_DEFINED_PAYLOAD"
+                            }
+                        ]
+                    }
+                }
+            }
+         }';
+        $ch = curl_init('https://graph.facebook.com/v2.6/me/messages?access_token='.$accessToken);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $response_json);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
 
-    //     $result = curl_exec($ch);
-
-    //     curl_close($ch);
-    // }
+        $result = curl_exec($ch);
+        curl_close($ch);
+        return $result;
+    }
 }
 // greeting messge sending along with button template, pending work. 
     //     $response_greeting = [
