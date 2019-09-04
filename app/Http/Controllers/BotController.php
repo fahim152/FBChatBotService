@@ -30,21 +30,26 @@ class BotController extends Controller
         $messageText =  isset($data['entry'][0]['messaging'][0]['message']['text']) ? $data['entry'][0]['messaging'][0]['message']['text'] : '';
         $postback = isset($data['entry'][0]['messaging'][0]['postback']['payload']) ? $data['entry'][0]['messaging'][0]['postback']['payload']: '';
         $attach = false;
-        $answer = ''; 
+        $answer = '';
         if($messageText !== ""){
+
+            // if(preg_match('/(send|tell|text)(.*?)joke/', $messageText)){
+            //     $resource = json_decode(file_get_contents('http://api.icndb.com/jokes/random'), true);
+            //     $answer = $resource['value']['joke'];
+
+            // }
+
             $answer = Chat::where('message_like','LIKE',"%$messageText%")->pluck('reply_with')->first();
             if($answer == null || $answer == ""){
-                $answer="I'm afraid :( I can't understand what you have just said. Do you want me to send an image? reply with yes/no";
-               
-                
+                $answer="I'm afraid :( I can't understand what you have just said. Do you want me to send an image? reply with yes";
+
             }
             if($messageText == "yes"){
                 $attach = true;
             }elseif($messageText == "no"){
                 $dd =  $this->sendMessagePostBack($accessToken, $senderId);
-                print_r($dd);
-                die();
-            }   
+
+            }
         }
 
         if($attach){
@@ -58,14 +63,15 @@ class BotController extends Controller
                 "message"   => [ "text" => $answer ],
             ];
 
-            
+
         }
-       
+
         $this->sendMessage($accessToken, $response);
-        
+        $this->sendMessagePostBack($accessToken, $senderId);
+
     }
-        
-    
+
+
     public function sendMessage($accessToken,$response){
         $ch = curl_init('https://graph.facebook.com/v4.0/me/messages?access_token='.$accessToken);
         curl_setopt($ch, CURLOPT_POST, 1);
@@ -78,7 +84,7 @@ class BotController extends Controller
     public function sendMessagePostBack($accessToken,$senderId){
         $response_json = '{
             "recipient":{
-                "id":"'.$senderId.'"
+                "id":"'.addslashes($senderId).'"
             },
             "message": {
                 "attachment":{
@@ -90,7 +96,7 @@ class BotController extends Controller
                             {
                                 "type":"web_url",
                                 "utl":"www.daraz.com",
-                                "title":"Show website"   
+                                "title":"Show website"
                             },
                             {
                                 "type":"postback",
@@ -112,11 +118,11 @@ class BotController extends Controller
         return $result;
     }
 }
-// greeting messge sending along with button template, pending work. 
+// greeting messge sending along with button template, pending work.
     //     $response_greeting = [
     //         'recipient' => [ 'id' => $senderId ],
-    //         'message' => [ 
-    //                     'attachment' => ['type' => 'template', 
+    //         'message' => [
+    //                     'attachment' => ['type' => 'template',
     //                                         'payload' => [
     //                                         'template_type' => 'generic',
     //                                         'elements' => [
@@ -133,12 +139,12 @@ class BotController extends Controller
     //                                                 "payload" => "User " + $senderId + " likes kitten " + 'https://placekitten.com/g/200/200',
 
     //                                                 ]
-    //                                         ] 
-    //                                     ] 
+    //                                         ]
+    //                                     ]
 
     //                         ],
-        
-            
+
+
     //                      ];
 
 
