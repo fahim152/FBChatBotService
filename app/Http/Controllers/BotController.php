@@ -35,18 +35,57 @@ class BotController extends Controller
             $answer = Chat::where('message_like','LIKE',"%$messageText%")->pluck('reply_with')->first();
       
             if(empty($answer)){
-               
-                $answer = 'I dont understand what you have just said';
+                $typing_animation ='{
+                    "recipient":{
+                      "id":"'.$senderId.'"
+                    },
+                    "sender_action":"typing_on"
+                  }';
+                  $this->sendMessage($accessToken, $typing_animation);
+                $answer = 'I dont understand what you have just said. :\'( Can I tell you a joke ? :D ';
+
+                $response_json = '{
+                    "recipient": {
+                        "id": "'.$senderId.'"
+                    },
+                    "message": {
+                        "attachment":{
+                            "type":"template",
+                            "payload":{
+                                "template_type":"button",
+                                "text":"'.$answer.'",
+                                "buttons": [
+                                    {
+                                        "type": "postback",
+                                        "title": "Hell yeah !",
+                                        "payload": "telljoke"
+                                    },
+                                 
+                                   
+                                ]
+                            }
+                        }
+                    }
+                }';
+            }else{
+                $response_json = '{
+                    "recipient": {
+                        "id": "'.$senderId.'"
+                    },
+                    "message": {
+                        "text": "'.$answer.'"
+                    }
+                }';
+                $typing_animation ='{
+                    "recipient":{
+                      "id":"'.$senderId.'"
+                    },
+                    "sender_action":"typing_on"
+                  }';
+                  $this->sendMessage($accessToken, $typing_animation);
             }
           
-            $response_json = '{
-                "recipient": {
-                    "id": "'.$senderId.'"
-                },
-                "message": {
-                    "text": "'.$answer.'"
-                }
-            }';
+     
 
                 $this->sendMessage($accessToken, $response_json);
 
@@ -57,6 +96,13 @@ class BotController extends Controller
             $joke = json_decode(file_get_contents('http://api.icndb.com/jokes/random'), true);
             $joke_get = $joke['value']['joke'];
              
+            $typing_animation ='{
+                "recipient":{
+                  "id":"'.$senderId.'"
+                },
+                "sender_action":"typing_on"
+              }';
+              $this->sendMessage($accessToken, $typing_animation);
                 $response_json = '{
                     "recipient": {
                         "id": "'.$senderId.'"
@@ -77,7 +123,7 @@ class BotController extends Controller
                                 "type":"template",
                                 "payload":{
                                     "template_type":"button",
-                                    "text":"Need another joke ?",
+                                    "text":"Wanna hear another joke ?",
                                     "buttons": [
                                         {
                                             "type": "postback",
@@ -86,7 +132,7 @@ class BotController extends Controller
                                         },
                                         {
                                             "type":"web_url",
-                                            "url":"http://www.thispersondoesnotexist.com",
+                                            "url":"http://www.fahim152.com",
                                             "title":"Show website"   
                                         }
                                        
@@ -100,7 +146,13 @@ class BotController extends Controller
         }    
             if(isset($messagingArray['postback'])){
                 if($messagingArray['postback']['payload'] == 'first_hand_shake'){
-                 
+                    $typing_animation ='{
+                        "recipient":{
+                          "id":"'.$senderId.'"
+                        },
+                        "sender_action":"typing_on"
+                      }';
+                      $this->sendMessage($accessToken, $typing_animation);
                     $message = "Hello Dear, Welcome to our page. why dont you just check our services or the website";
                     $response_json = '{
                         "recipient": {
