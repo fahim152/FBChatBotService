@@ -71,6 +71,9 @@ return [
     'setting'                => 'Setting',
     'chats'                  => 'Chats',
     'chat'                   => 'Chat',
+    'apparels'               => 'Apparels',
+    'recipients'               => 'Recipients',
+    'orders'                   => 'Orders',
 
 ];
 

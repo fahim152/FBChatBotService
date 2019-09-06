@@ -86,6 +86,30 @@ Route::group(['middleware' => 'auth'],function() {
     Route::post('/chats/update', 'ChatController@update')->name('chats_update');
 
 
+    /* -------------------------------------------------------------------------
+    | apparels
+    |------------------------------------------------------------------------ */
+    Route::get('/apparels', 'ApparelController@index')->name('apparels');
+    Route::post('/apparels/dataload', 'ApparelController@datatable')->name('apparels_load');
+    Route::get('/apparels/create', 'ApparelController@create')->name('apparels_create');
+    Route::get('/apparels/edit/{apparel}', 'ApparelController@edit')->name('apparels_edit');
+    Route::post('/apparels/update', 'ApparelController@update')->name('apparels_update');
+
+    /* -------------------------------------------------------------------------
+    | Recipient
+    |------------------------------------------------------------------------ */
+    Route::get('/recipients', 'RecipientController@index')->name('recipients');
+    Route::post('/recipients/dataload', 'RecipientController@datatable')->name('recipients_load');
+    Route::post('/recipients/update', 'RecipientController@update')->name('recipients_update');
+
+    /* -------------------------------------------------------------------------
+    | Recipient
+    |------------------------------------------------------------------------ */
+    Route::get('/orders', 'OrderController@index')->name('orders');
+    Route::post('/orders/dataload', 'OrderController@datatable')->name('orders_load');
+
+
+
 
 
 });

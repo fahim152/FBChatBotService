@@ -18,6 +18,8 @@ class CreateSettingTable extends Migration
             $table->string('fb_app_name')->nullable();
             $table->text('token')->nullable();
             $table->timestamps();
+            $table->softDeletes();
+
         });
     }
 

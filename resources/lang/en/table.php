@@ -41,7 +41,9 @@ return [
     'fb_app_name'           => 'FB App Name',
     'token'                 => 'Token',
     'message_like'          => 'Message Like',
-    'reply_with'           => 'Reply With',
-    'app_token'                 => ' App Token',
-
+    'reply_with'            => 'Reply With',
+    'app_token'             => ' App Token',
+    'phone'                 => 'Phone',
+    'apparel_model'         => 'Apparel Model',
+    'apparel_image'         => 'Apparel Image',
 ];
