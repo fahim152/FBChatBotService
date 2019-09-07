@@ -36,7 +36,8 @@ class BotController extends Controller
 
 
         if(preg_match('/(01)|\+880|001|1(.*?)/', $messageText)){
-            $order_id = Order::where('recipient_id', $senderId)->pluck('id')->first();
+            
+            $order_id = Order::where('recipient_id', $senderId)->orderBy('updated_at','desc')->pluck('id')->first();
             $updateOrder = Order::find($order_id);
             $updateOrder->phone = $messageText;
             $updateOrder->status = 'done';
@@ -220,7 +221,7 @@ class BotController extends Controller
                                {
                                   "type":"postback",
                                   "title":"Order Now",
-                                  "payload":"tshirt3_order"
+                                  "payload":"tshirt1_order"
                                 }
                               ]
                             },
@@ -278,6 +279,7 @@ class BotController extends Controller
             $order->apparel_id =  $apparel_id ;
 
             $order->save();
+            $this->typingAnimation($senderId,$accessToken);
             $message = "Please Insert Your phone number. We will get back to you as soon as possible";
                     $response_json = '{
                         "recipient": {
