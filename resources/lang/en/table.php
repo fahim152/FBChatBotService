@@ -47,7 +47,7 @@ return [
     'apparel_model'         => 'Apparel Model',
     'apparel_image'         => 'Apparel Image',
     'recipients_id'         => 'Recipient ID',
-    'model'                 => 'Model',\
+    'model'                 => 'Model',
     'quantity'              => 'Quantity',
     'image'                 => 'Image',
     
