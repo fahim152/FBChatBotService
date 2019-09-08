@@ -74,6 +74,7 @@ return [
     'apparels'               => 'Apparels',
     'recipients'               => 'Recipients',
     'orders'                   => 'Orders',
+    'apparel'               => 'Apparel'
 
 ];
 

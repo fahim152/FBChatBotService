@@ -46,7 +46,9 @@ return [
     'phone'                 => 'Phone',
     'apparel_model'         => 'Apparel Model',
     'apparel_image'         => 'Apparel Image',
-    'recipients_id'            => 'Recipient ID',
-   
+    'recipients_id'         => 'Recipient ID',
+    'model'                 => 'Model',\
+    'quantity'              => 'Quantity',
+    'image'                 => 'Image',
     
 ];
